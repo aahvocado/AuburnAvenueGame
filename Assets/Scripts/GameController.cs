@@ -72,18 +72,42 @@ public class GameController : MonoBehaviour {
 	
 	//
 	void addBit(string pos){
-		GameObject newBit = (GameObject)Instantiate(bitObject, new Vector3(0, 0, 0), Quaternion.identity);
-		BitComponent bitScript = newBit.GetComponent<BitComponent>();
-		bitScript.setNum(1);
+		GameObject bit;
+		BitComponent bitScript;// = newBit.GetComponent<BitComponent>();
 			
-		int rand = Random.Range(0, grid.GetLength(0));
+		int rand = Random.Range(0, grid.GetLength(0)-1);
+		print ("RANDOM "+rand);
 		
 		switch(pos){
-			case "top":
-				
+			case "up":
+				bit = (GameObject)grid[rand, grid.GetLength(1)-1];
+				bitScript = bit.GetComponent<BitComponent>();
+				if(bitScript.getNum() == 0){
+					bitScript.setNum(1);
+				}
+				break;
+			case "right":
+				bitScript = grid[0, rand].GetComponent<BitComponent>();
+				if(bitScript.getNum() == 0){
+					bitScript.setNum(1);
+				}
+				break;
+			case "down":
+				bitScript = grid[rand, 0].GetComponent<BitComponent>();
+				if(bitScript.getNum() == 0){
+					bitScript.setNum(1);
+				}
+				break;
+			case "left":
+				bitScript = grid[grid.GetLength(0)-1, rand].GetComponent<BitComponent>();
+				if(bitScript.getNum() == 0){
+					bitScript.setNum(1);
+				}
 				break;
 		}
 	}
+	
+	
 	//switch the positions of two pieces
 	void swapBits(BitComponent A, BitComponent B){
 		int numA = A.getNum();
