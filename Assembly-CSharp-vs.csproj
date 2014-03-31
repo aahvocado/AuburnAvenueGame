@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BitComponent.cs" />
      <Compile Include="Assets\Scripts\GameController.cs" />
+     <Compile Include="Assets\Scripts\GestureHandler.cs" />
+     <Compile Include="Assets\StatsGUI.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -27,32 +27,38 @@ public class BitComponent : MonoBehaviour {
 			case 4:
 				n = "4";
 				break;
+			case 5:
+				n = "5";
+				break;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		SpriteRenderer spRe = transform.GetComponent<SpriteRenderer>();
-		if(spriteNum > mats.Length){
+		if(spriteNum > mats.Length-1){
 			spriteNum = mats.Length-1;
 		}
 		spRe.sprite = mats[spriteNum];
 		
 		switch(spriteNum){
 			case 0:
-				transform.localScale = new Vector3(.2f,.2f,.2f);
+				transform.localScale = new Vector3(.62f,.62f,.62f);
 				break;
 			case 1:
 				transform.localScale = new Vector3(.62f,.62f,.62f);
 				break;
 			case 2:
-				transform.localScale = new Vector3(.2f,.2f,.2f);
+				transform.localScale = new Vector3(.62f,.62f,.62f);
 				break;
 			case 3:
-				transform.localScale = new Vector3(.2f,.2f,.2f);
+				transform.localScale = new Vector3(.62f,.62f,.62f);
 				break;
 			case 4:
-				transform.localScale = new Vector3(.2f,.2f,.2f);
+				transform.localScale = new Vector3(.62f,.62f,.62f);
+				break;
+			case 5:
+				transform.localScale = new Vector3(.62f,.62f,.62f);
 				break;
 		}
 	}

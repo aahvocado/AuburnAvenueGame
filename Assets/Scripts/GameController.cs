@@ -69,12 +69,31 @@ public class GameController : MonoBehaviour {
 									{0,0,1}};
 		populateGrid(newGrid);
 	}
+	
+	//
+	void addBit(string pos){
+		GameObject newBit = (GameObject)Instantiate(bitObject, new Vector3(0, 0, 0), Quaternion.identity);
+		BitComponent bitScript = newBit.GetComponent<BitComponent>();
+		bitScript.setNum(1);
+			
+		int rand = Random.Range(0, grid.GetLength(0));
+		
+		switch(pos){
+			case "top":
+				
+				break;
+		}
+	}
+	//switch the positions of two pieces
 	void swapBits(BitComponent A, BitComponent B){
 		int numA = A.getNum();
 		int numB = B.getNum();
 		
 		if(numA == numB){//combine
-			B.spriteNum = numA+numB;
+			//B.spriteNum = numA+numB;
+			if(B.spriteNum != 0){
+				B.spriteNum ++;
+			}
 			A.spriteNum = 0;
 		}else if(numB == 0){//empty
 			int tempNum = numB;
@@ -96,6 +115,8 @@ public class GameController : MonoBehaviour {
 				}
 			}
 		}
+		
+		addBit("right");
 	}
 	
 	void activateLeft(){
@@ -111,6 +132,8 @@ public class GameController : MonoBehaviour {
 				
 			}
 		}
+		
+		addBit("left");
 	}
 	
 	void activateUp(){
@@ -127,6 +150,8 @@ public class GameController : MonoBehaviour {
 				
 			}
 		}
+		
+		addBit("up");
 	}
 	
 	void activateDown(){
@@ -141,6 +166,9 @@ public class GameController : MonoBehaviour {
 				}
 			}
 		}
+		
+		addBit("down");
+		
 	}
 	
 	//constantly update grid
