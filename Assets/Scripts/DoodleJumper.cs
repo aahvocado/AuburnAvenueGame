@@ -20,8 +20,8 @@ public class DoodleJumper : MonoBehaviour {
 
 		//make character fall
 		this.transform.Translate(velocity * Time.deltaTime);
-
-		if (velocity.y > -10) {//don't fall too far
+		float maxFallVelocity = -15;
+		if (velocity.y > maxFallVelocity) {//don't fall too far
 			velocity = new Vector3 (velocity.x, velocity.y - gravity, velocity.z);
 		}
 	}
