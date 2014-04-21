@@ -20,12 +20,29 @@ public class DoodleGameController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		moveCamera ();
+
+		Vector3 playerpos = player.transform.position;
+		Vector3 campos = maincam.transform.position;
+		//dead player
+		if (playerpos.y < campos.y - 13) {
+			reset ();
+		}
+
+		//build more platforms
 		if (platforms.Count > 1) {
 				if (player.transform.position.y > platforms [platforms.Count - 1].transform.position.y - 10.0f) {
 						despawnPlatforms ();
 						spawnPlatforms ();
 				}
 		}
+	}
+
+	void reset(){
+		maincam.transform.position = new Vector3 (0, 0, -15);
+		player.GetComponent<DoodleJumper> ().reset();
+		removeAllPlatforms ();
+
+		spawnPlatforms ();
 	}
 
 	void moveCamera(){//handle the camera
@@ -37,21 +54,31 @@ public class DoodleGameController : MonoBehaviour {
 		}
 	}
 
+	void removeAllPlatforms(){
+
+
+		foreach(GameObject p in platforms){//destroy all platforms
+			Destroy (p);
+		}
+		platforms = new List<GameObject>();
+	}
+
 	void despawnPlatforms(){//remove platforms behind player
-		int removeToThisNumber = 0;//highest platform the player can't see
-		for (int i=0; i<platforms.Count; i++) {
+		for (int i = platforms.Count-1; i>0; i--) {
 			if(platforms[i].transform.position.y < player.transform.position.y - 8.0f){
 				Destroy (platforms[i]);
+				platforms.RemoveAt (i);
 			}
+
 		}
-		platforms.RemoveRange (0, removeToThisNumber);
 	}
 
 	void spawnPlatforms(){//create new platforms
-		Vector3 spawnPos = maincam.transform.position;
-		if(platforms.Count > 1){
+		Vector3 spawnPos = maincam.transform.position;//default spawn position
+		if(platforms.Count > 1){//if we're above
 			spawnPos = new Vector3(maincam.transform.position.x, platforms[platforms.Count-1].transform.position.y, 0);
 		}
+
 		for (int i = 0; i<platformSpawnCount; i++) {
 			float xoffset = Random.Range(-5, 5);//randomize position of platform
 			float yoffset = Random.Range(-.5f, .5f);//offset y a bit

@@ -28,7 +28,14 @@ public class DoodleJumper : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision c){
 		if (c.collider.tag == "Platform") {
-			velocity = new Vector3(velocity.x, jump, velocity.z);
+			if(this.transform.position.y > c.transform.position.y){
+				velocity = new Vector3(velocity.x, jump, velocity.z);
+			}
 		}
+	}
+
+	public void reset(){
+		velocity = new Vector3(0, 5f, 0);
+		this.transform.position = new Vector3 (0, 0, 0);
 	}
 }
