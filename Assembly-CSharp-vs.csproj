@@ -46,9 +46,11 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DoodleCameraFollower.cs" />
      <Compile Include="Assets\Scripts\BitComponent.cs" />
+     <Compile Include="Assets\Scripts\CandyGameController.cs" />
+     <Compile Include="Assets\Scripts\DoodleGameController.cs" />
      <Compile Include="Assets\Scripts\DoodleJumper.cs" />
-     <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\GestureHandler.cs" />
      <Compile Include="Assets\Scripts\StatsGUI.cs" />
   </ItemGroup>

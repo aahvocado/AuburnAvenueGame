@@ -3,7 +3,9 @@ using System.Collections;
 
 public class DoodleJumper : MonoBehaviour {
 
-	public Vector3 velocity = new Vector3(0, 5f, 0);
+	private Vector3 velocity = new Vector3(0, 5f, 0);
+	public float speed = 5.0f;
+	public float jump = 15.0f;
 	public float gravity = 2.0f;
 
 	// Use this for initialization
@@ -13,6 +15,8 @@ public class DoodleJumper : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		float move = Input.GetAxis("Horizontal");
+		velocity.x = move * speed;
 
 		//make character fall
 		this.transform.Translate(velocity * Time.deltaTime);
@@ -24,7 +28,7 @@ public class DoodleJumper : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision c){
 		if (c.collider.tag == "Platform") {
-			velocity = new Vector3(velocity.x, 15f, velocity.z);
+			velocity = new Vector3(velocity.x, jump, velocity.z);
 		}
 	}
 }
