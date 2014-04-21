@@ -64,9 +64,11 @@ public class GameController : MonoBehaviour {
 	}
 	
 	void setLevel1(){		
-		int[,] newGrid = new int[,]{{1,0,0},
-									{0,2,0},
-									{0,0,1}};
+		int[,] newGrid = new int[,]{{0,0,0,0,0},
+									{0,0,0,0,0},
+									{0,0,1,0,0},
+									{0,0,0,0,0},
+									{0,0,0,0,0}};
 		populateGrid(newGrid);
 	}
 	
