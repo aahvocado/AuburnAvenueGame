@@ -12,6 +12,8 @@ using UnityEngine;
 public class DefaultTrackableEventHandler : MonoBehaviour,
                                             ITrackableEventHandler
 {
+	public GameObject gamecontroller;
+
     #region PRIVATE_MEMBER_VARIABLES
  
     private TrackableBehaviour mTrackableBehaviour;
@@ -80,7 +82,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         {
             component.enabled = true;
         }
-
+		gamecontroller.GetComponent<DoodleGameController> ().trackingFound ();
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
     }
 
@@ -101,7 +103,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         {
             component.enabled = false;
         }
-
+		gamecontroller.GetComponent<DoodleGameController> ().trackingLost ();
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
     }
 

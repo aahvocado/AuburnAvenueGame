@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class DoodleGameController : MonoBehaviour {
 	public GameObject player;//the doodle jumper
 	public Camera maincam;//main camera
-	public GameObject infoFollow;//the display to follow this
+	public GameObject imagetarget;//image target
+
+	public GameObject textreference;//the display to follow this
 
 	public GameObject platform;//platform to duplicate
 	public int platformSpawnCount = 10;
@@ -14,6 +16,8 @@ public class DoodleGameController : MonoBehaviour {
 	public GameObject chaser;//thing to chase
 
 	private List<GameObject> platforms = new List<GameObject>();
+	private List<GameObject> texts = new List<GameObject>();
+
 
 	// Use this for initialization
 	void Start () {
@@ -38,32 +42,52 @@ public class DoodleGameController : MonoBehaviour {
 						spawnPlatforms ();
 				}
 		}
+		//chaserManager ();
 
-		//check mesh renderer of imagetarget
-		Chaser c = chaser.GetComponent<Chaser> ();
-		if (infoFollow.GetComponent<MeshRenderer> ().enabled == true) {
-			c.gameObject.SetActive (true);
+	}
 
-			if(c.isChasing == false){
-				c.respawn();
-			}
-		   c.isChasing = true;
-	   } else {
-			c.isChasing = false;
+	void textManager(){
+	}
+
+	void createNewStory(){
+		Vector3 campos = maincam.transform.position;
+		float distanceBetweenText = 18.0f;
+		for (int i=0; i<8; i++) {
+			Vector3 newpos = new Vector3(0, campos.y + distanceBetweenText*i + 15.0f, 02);
+			GameObject t = (GameObject)Instantiate(textreference, newpos, Quaternion.identity);
+			t.GetComponent<InfoOverlay>().textNum = i;
 		}
+
 	}
 
-	float getPoints(){
-		return this.transform.position.y;
+
+	public void trackingFound(){
+		Chaser c = chaser.GetComponent<Chaser> ();
+
+		c.gameObject.SetActive (true);
+		
+		if(c.isChasing == false){
+			createNewStory();
+			c.respawn();
+		}
+		c.isChasing = true;
 	}
+
+	public void trackingLost(){
+		Chaser c = chaser.GetComponent<Chaser> ();
+		c.isChasing = false;
+	}
+
+
 
 	void reset(){
 		maincam.transform.position = new Vector3 (0, 0, -15);
+
+		removeAllPlatforms ();
+		spawnPlatforms ();
+
 		player.GetComponent<DoodleJumper> ().reset();
 		chaser.GetComponent<Chaser> ().reset ();
-		removeAllPlatforms ();
-
-		spawnPlatforms ();
 	}
 
 	void moveCamera(){//handle the camera
@@ -73,7 +97,7 @@ public class DoodleGameController : MonoBehaviour {
 		if (playerPos.y+cameraOffset > pos.y) {
 			maincam.transform.position = new Vector3 (pos.x, player.transform.position.y+cameraOffset, pos.z);
 		}
-		infoFollow.transform.position = maincam.transform.position;
+		imagetarget.transform.position = maincam.transform.position;
 	}
 
 	void removeAllPlatforms(){

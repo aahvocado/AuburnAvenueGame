@@ -272,10 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf4a8ad9773e9419cff0a4db2361e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 1561387615}
-  startRandom: 1
-  bitObject: {fileID: 100000, guid: c0b620cafaf253e4ca43d3692b512959, type: 2}
-  waitSet: 11
 --- !u!4 &1381727456
 Transform:
   m_ObjectHideFlags: 0

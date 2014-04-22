@@ -8,6 +8,8 @@ public class DoodleJumper : MonoBehaviour {
 	public float jump = 15.0f;
 	public float gravity = 2.0f;
 
+	private int timesCaught = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -25,15 +27,35 @@ public class DoodleJumper : MonoBehaviour {
 			velocity = new Vector3 (velocity.x, velocity.y - gravity, velocity.z);
 		}
 	}
+
+	public float getPoints(){
+		return this.transform.position.y;
+	}
+	
+	public int getCaptures(){
+		return timesCaught;
+	}
+
+	void caughtChaser(){
+		speed += .9f;
+		jump += 1.0f;
+		timesCaught ++;
+	}
+
+	void OnTriggerStay(Collider c) {
+		if (c.tag == "Chaser") {
+			print ("caught chaser");
+			c.GetComponent<Chaser>().caught();
+			caughtChaser();
+		}
+		
+	}
 	
 	void OnCollisionEnter(Collision c){
 		if (c.collider.tag == "Platform") {
 			if(this.transform.position.y > c.transform.position.y){
 				velocity = new Vector3(velocity.x, jump, velocity.z);
 			}
-		}
-		if (c.collider.tag == "Chaser") {
-			print ("caught chaser");
 		}
 	}
 

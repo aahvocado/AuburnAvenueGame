@@ -15,7 +15,7 @@ public class Chaser : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		reset ();
-	
+		this.renderer.material.color = Color.yellow;
 	}
 	//completely restart chaser at bottom
 	public void reset(){
@@ -24,11 +24,13 @@ public class Chaser : MonoBehaviour {
 	}
 	//yay we did it
 	public void caught(){
+		respawn ();
+		speed += 2f;
 	}
 
 	//chaser now visible, show facts, run from player etc
 	public void respawn(){
-		this.transform.position =  new Vector3(0, maincam.transform.position.y + 2.0f, 0);
+		this.transform.position =  new Vector3(0, maincam.transform.position.y + 4.2f, 0);
 	}
 	
 	// Update is called once per frame
