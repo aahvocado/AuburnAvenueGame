@@ -4,11 +4,15 @@ using System.Collections.Generic;
 
 public class DoodleGameController : MonoBehaviour {
 	public GameObject player;//the doodle jumper
-	public GameObject platform;//platform to duplicate
 	public Camera maincam;//main camera
+	public GameObject infoFollow;//the display to follow this
 
+	public GameObject platform;//platform to duplicate
 	public int platformSpawnCount = 10;
 	public float distanceBetweenPlatforms = 2.0f;
+
+	public GameObject powerUp;
+	public GameObject fluffObj;//object to spawn depending on the level
 
 	private List<GameObject> platforms = new List<GameObject>();
 
@@ -52,6 +56,7 @@ public class DoodleGameController : MonoBehaviour {
 		if (playerPos.y+cameraOffset > pos.y) {
 			maincam.transform.position = new Vector3 (pos.x, player.transform.position.y+cameraOffset, pos.z);
 		}
+		infoFollow.transform.position = maincam.transform.position;
 	}
 
 	void removeAllPlatforms(){
