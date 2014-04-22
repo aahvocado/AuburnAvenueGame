@@ -11,8 +11,7 @@ public class DoodleGameController : MonoBehaviour {
 	public int platformSpawnCount = 10;
 	public float distanceBetweenPlatforms = 2.0f;
 
-	public GameObject powerUp;
-	public GameObject fluffObj;//object to spawn depending on the level
+	public GameObject chaser;//thing to chase
 
 	private List<GameObject> platforms = new List<GameObject>();
 
@@ -39,11 +38,29 @@ public class DoodleGameController : MonoBehaviour {
 						spawnPlatforms ();
 				}
 		}
+
+		//check mesh renderer of imagetarget
+		Chaser c = chaser.GetComponent<Chaser> ();
+		if (infoFollow.GetComponent<MeshRenderer> ().enabled == true) {
+			c.gameObject.SetActive (true);
+
+			if(c.isChasing == false){
+				c.respawn();
+			}
+		   c.isChasing = true;
+	   } else {
+			c.isChasing = false;
+		}
+	}
+
+	float getPoints(){
+		return this.transform.position.y;
 	}
 
 	void reset(){
 		maincam.transform.position = new Vector3 (0, 0, -15);
 		player.GetComponent<DoodleJumper> ().reset();
+		chaser.GetComponent<Chaser> ().reset ();
 		removeAllPlatforms ();
 
 		spawnPlatforms ();

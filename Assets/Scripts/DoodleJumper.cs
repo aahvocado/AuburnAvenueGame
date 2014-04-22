@@ -32,6 +32,9 @@ public class DoodleJumper : MonoBehaviour {
 				velocity = new Vector3(velocity.x, jump, velocity.z);
 			}
 		}
+		if (c.collider.tag == "Chaser") {
+			print ("caught chaser");
+		}
 	}
 
 	public void reset(){
